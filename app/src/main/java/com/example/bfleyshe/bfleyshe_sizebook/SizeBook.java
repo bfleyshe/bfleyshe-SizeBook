@@ -73,6 +73,7 @@ public class SizeBook extends AppCompatActivity {
                    editButton.setBackgroundResource(android.R.drawable.btn_default);
                    Intent intent = new Intent(SizeBook.this, EditRecordsActivity.class);
                    intent.putExtra("person", personList.get(position));
+                   interactMode = 0;
                    startActivity(intent);
                }
                else if(interactMode == 2){

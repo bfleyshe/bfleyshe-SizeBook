@@ -12,7 +12,7 @@ public class ViewRecordsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_records);
+        setContentView(R.layout.activity_view_records);
 
         TextView editNameText = (TextView) findViewById(R.id.nameView);
         TextView dateText = (TextView) findViewById(R.id.dateView);
@@ -28,7 +28,7 @@ public class ViewRecordsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final Person person = intent.getParcelableExtra("person");
-/*
+
         editNameText.setText("Name:" + person.getName(), TextView.BufferType.EDITABLE);
         dateText.setText("Date:" + person.getDate(), TextView.BufferType.EDITABLE);
         neckText.setText("Neck:" + person.getNeck(), TextView.BufferType.EDITABLE);
@@ -38,7 +38,7 @@ public class ViewRecordsActivity extends AppCompatActivity {
         hipText.setText("Hip:" + person.getHip(), TextView.BufferType.EDITABLE);
         inseamText.setText("Inseam:" + person.getInseam(), TextView.BufferType.EDITABLE);
         commentText.setText("Comment:" + person.getComment(), TextView.BufferType.EDITABLE);
-*/
+
         backButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
