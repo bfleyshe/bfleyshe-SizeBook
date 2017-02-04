@@ -62,6 +62,9 @@ public class EditRecordsActivity extends AppCompatActivity {
                 person.setInseam(Integer.parseInt(inseamText.getText().toString()));
                 person.setComment(commentText.getText().toString());
 
+                Intent intent = new Intent(EditRecordsActivity.this, SizeBook.class);
+                intent.putExtra("person", person);
+
                 finish();
             }
         });

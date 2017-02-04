@@ -75,6 +75,14 @@ public class SizeBook extends AppCompatActivity {
                    intent.putExtra("person", personList.get(position));
                    interactMode = 0;
                    startActivity(intent);
+
+/*
+                   Intent i = getIntent();
+                   final Person person = i.getParcelableExtra("person");
+
+                   personList.remove(position);
+                   personList.add(position, person);
+*/
                }
                else if(interactMode == 2){
                    personList.remove(position);

@@ -28,7 +28,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -56,8 +55,7 @@
         android:id="@+id/dateText"
         android:layout_below="@+id/editTextName"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="Date" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="Neck:"
@@ -81,8 +79,7 @@
         android:id="@+id/neckText"
         android:layout_below="@+id/dateView"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="Circumference (Inches)" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="Bust:"
@@ -106,8 +103,7 @@
         android:id="@+id/bustText"
         android:layout_below="@+id/neckText"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="Circumference (Inches)" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="Chest:"
@@ -131,8 +127,7 @@
         android:id="@+id/chestText"
         android:layout_below="@+id/bustText"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="Circumference(Inches)" />
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -142,8 +137,7 @@
         android:id="@+id/waistText"
         android:layout_below="@+id/chestText"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="Circumference(Inches)" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="Waist:"
@@ -181,8 +175,7 @@
         android:layout_below="@+id/waistText"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/hipText"
-        android:text="Circumference(Inches)" />
+        android:id="@+id/hipText" />
 
     <TextView
         android:text="Inseam:"
@@ -206,8 +199,7 @@
         android:layout_below="@+id/hipText"
         android:layout_alignLeft="@+id/hipText"
         android:layout_alignStart="@+id/hipText"
-        android:id="@+id/inseamText"
-        android:text="Length(Inches)" />
+        android:id="@+id/inseamText" />
 
     <EditText
         android:layout_width="wrap_content"
