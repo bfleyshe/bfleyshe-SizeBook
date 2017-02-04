@@ -38,16 +38,14 @@ import java.util.ArrayList;
  */
 public class SizeBook extends AppCompatActivity {
 
-    public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-
     private static final String FILENAME = "file.sav";
     private EditText bodyText;
     private ListView RecordsList;
-    private Integer recordCount = 0;
+    private Integer recordCount;
 
     private ArrayList<Person> personList;
     private ArrayAdapter<Person> adapter;
-    private Integer interactMode = 0; // 0 is view, 1 is edit mode, 2 is delete: Note should be changed to enumeration
+    private Integer interactMode = 0; // 0 is view, 1 is edit mode, 2 is delete: //TODO should be changed to enumeration
 
 
 
@@ -63,7 +61,6 @@ public class SizeBook extends AppCompatActivity {
         final Button deleteButton = (Button) findViewById(R.id.delete);
         final TextView recordText = (TextView) findViewById(R.id.recordsView);
 
-
         RecordsList.setAdapter(adapter);
 
         // ListView on item selected listener.
@@ -73,13 +70,22 @@ public class SizeBook extends AppCompatActivity {
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                if(interactMode == 1){
+                   editButton.setBackgroundResource(android.R.drawable.btn_default);
                    Intent intent = new Intent(SizeBook.this, EditRecordsActivity.class);
+                   intent.putExtra("person", personList.get(position));
                    startActivity(intent);
                }
                else if(interactMode == 2){
                    personList.remove(position);
                    recordCount--;
                    recordText.setText("Records:" + recordCount, TextView.BufferType.EDITABLE);
+                   saveInFile();
+               }
+
+               else if(interactMode == 0){
+                   Intent intent = new Intent(SizeBook.this, ViewRecordsActivity.class);
+                   intent.putExtra("person", personList.get(position));
+                   startActivity(intent);
                }
 
                adapter.notifyDataSetChanged();
@@ -90,7 +96,7 @@ public class SizeBook extends AppCompatActivity {
 
             public void onClick(View v) {
                 setResult(RESULT_OK);
-                interactMode = 0;   // returns to normal mode
+                interactMode = 0;   // returns to view mode
                 String name = "Name";//bodyText.getText().toString();    // to change later
 
                 try {
@@ -155,10 +161,10 @@ public class SizeBook extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onStart();
         loadFromFile();
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_2, android.R.id.text1);
         adapter = new ArrayAdapter<Person>(this,
                 android.R.layout.simple_list_item_1, personList);
         RecordsList.setAdapter(adapter);
+        recordCount = personList.size();
     }
 
 

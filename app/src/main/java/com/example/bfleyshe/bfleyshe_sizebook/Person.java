@@ -4,22 +4,25 @@
 
 package com.example.bfleyshe.bfleyshe_sizebook;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 /**
  * Created by bfleyshe on 2/1/17.
  */
-public class Person {
+public class Person implements Parcelable{
 
     private String name;
     private Date date;
-    private Integer neck;
-    private Integer bust;
-    private Integer chest;
-    private Integer waist;
-    private Integer hip;
-    private Integer inseam;
-    private String comment;
+    private Integer neck = 0;
+    private Integer bust = 0;
+    private Integer chest = 0;
+    private Integer waist = 0;
+    private Integer hip = 0;
+    private Integer inseam = 0;
+    private String comment = "None";
 
     /**
      * Instantiates a new Person with a Name.
@@ -28,6 +31,7 @@ public class Person {
      */
     public Person(String Name) throws NameTooLongException{
         this.name = Name;
+        setDate(new Date());
     }
 
     /**
@@ -198,5 +202,59 @@ public class Person {
     @Override
     public String toString(){
         return name;
+    }
+
+
+    //Passing parcel object for intent, gotten Feb 3rd, 17:27
+    //http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    // write my object's data to the passed-in Parcel
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(getName());
+        //out.writeString(date.toString());
+
+        out.writeInt(getNeck());
+        out.writeInt(getBust());
+        out.writeInt(getChest());
+        out.writeInt(getWaist());
+        out.writeInt(getHip());
+        out.writeInt(getInseam());
+        out.writeString(getComment());
+    }
+
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<Person> CREATOR = new Parcelable.Creator<Person>() {
+        public Person createFromParcel(Parcel in) {
+            return new Person(in);
+        }
+
+        public Person[] newArray(int size) {
+            return new Person[size];
+        }
+    };
+
+    // example constructor that takes a Parcel and gives you an object populated with it's values
+    private Person(Parcel in) {
+        name = in.readString();/*
+        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            date = (Date)formatter.parse(in.readString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+        neck = in.readInt();
+        bust = in.readInt();
+        chest = in.readInt();
+        waist = in.readInt();
+        hip = in.readInt();
+        inseam = in.readInt();
+        comment = in.readString();
+
     }
 }

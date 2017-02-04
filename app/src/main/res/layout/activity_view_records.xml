@@ -16,24 +16,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/nameView"
         android:layout_alignBottom="@+id/editTextName"
-        android:layout_toLeftOf="@+id/editTextName"
         android:layout_toStartOf="@+id/editTextName"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:textSize="36sp"
-        android:textAlignment="center" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/editTextName" />
+        android:textAlignment="textStart" />
 
     <TextView
         android:text="Date:"
@@ -41,23 +31,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/dateView"
         android:layout_below="@+id/nameView"
-        android:layout_toLeftOf="@+id/editTextName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignBottom="@+id/dateText"
-        android:textAlignment="center"
-        android:textSize="36sp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/dateText"
-        android:layout_below="@+id/editTextName"
+        android:textAlignment="textStart"
+        android:textSize="36sp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="Date" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="Neck:"
@@ -67,22 +47,12 @@
         android:layout_below="@+id/dateView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/dateText"
         android:layout_toStartOf="@+id/dateText"
         android:layout_alignBottom="@+id/neckText"
         android:textSize="36sp"
-        android:textAlignment="center" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/neckText"
-        android:layout_below="@+id/dateView"
+        android:textAlignment="textStart"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="Circumference (Inches)" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="Bust:"
@@ -94,20 +64,10 @@
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/neckText"
         android:layout_alignBottom="@+id/bustText"
-        android:layout_toLeftOf="@+id/neckText"
         android:textSize="36sp"
-        android:textAlignment="center" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/bustText"
-        android:layout_below="@+id/neckText"
+        android:textAlignment="textStart"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="Circumference (Inches)" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="Chest:"
@@ -118,32 +78,11 @@
         android:layout_alignParentStart="true"
         android:id="@+id/chestView"
         android:layout_above="@+id/waistText"
-        android:layout_toLeftOf="@+id/bustText"
         android:layout_toStartOf="@+id/bustText"
-        android:textAlignment="center"
-        android:textSize="36sp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/chestText"
-        android:layout_below="@+id/bustText"
+        android:textAlignment="textStart"
+        android:textSize="36sp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="Circumference(Inches)" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/waistText"
-        android:layout_below="@+id/chestText"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="Circumference(Inches)" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="Waist:"
@@ -153,11 +92,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/waistView"
-        android:layout_toLeftOf="@+id/chestText"
         android:layout_toStartOf="@+id/chestText"
         android:layout_above="@+id/hipText"
         android:textSize="36sp"
-        android:textAlignment="center" />
+        android:textAlignment="textStart"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="Hip:"
@@ -168,21 +108,11 @@
         android:layout_alignParentStart="true"
         android:id="@+id/hipView"
         android:layout_above="@+id/inseamText"
-        android:layout_toLeftOf="@+id/hipText"
         android:layout_toStartOf="@+id/hipText"
-        android:textAlignment="center"
-        android:textSize="36sp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:layout_below="@+id/waistText"
+        android:textAlignment="textStart"
+        android:textSize="36sp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/hipText"
-        android:text="Circumference(Inches)" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="Inseam:"
@@ -192,46 +122,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/inseamView"
-        android:layout_above="@+id/commentText"
-        android:layout_toLeftOf="@+id/hipText"
         android:layout_toStartOf="@+id/hipText"
         android:textSize="36sp"
-        android:textAlignment="center" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:layout_below="@+id/hipText"
-        android:layout_alignLeft="@+id/hipText"
-        android:layout_alignStart="@+id/hipText"
-        android:id="@+id/inseamText"
-        android:text="Length(Inches)" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Comment"
-        android:ems="10"
-        android:layout_below="@+id/inseamText"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/commentText"
-        android:textSize="24sp"
-        android:layout_above="@+id/saveButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:text="Save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/backButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/saveButton"
+        android:textAlignment="textStart"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -245,5 +138,18 @@
         android:id="@+id/backButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Comment:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/commentView"
+        android:layout_below="@+id/inseamView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/backButton"
+        android:textSize="24sp" />
 
 </RelativeLayout>
