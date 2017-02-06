@@ -11,6 +11,7 @@ import java.util.Date;
 
 public class EditRecordsActivity extends AppCompatActivity {
 
+    //edit fields
     private EditText editNameText;
     private EditText dateText;
     private EditText neckText;
@@ -44,34 +45,50 @@ public class EditRecordsActivity extends AppCompatActivity {
         //http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
         Intent intent = getIntent();
         final Person person = intent.getParcelableExtra("person");
+        final int position = intent.getIntExtra("position", 0);
+
+        editNameText.setText(person.getName()); //sets all values from text fields to default values
+        dateText.setText(person.getDate());
+        neckText.setText(person.getNeck().toString());
+        bustText.setText(person.getBust().toString());
+        chestText.setText(person.getChest().toString());
+        waistText.setText(person.getWaist().toString());
+        hipText.setText(person.getHip().toString());
+        inseamText.setText(person.getInseam().toString());
+        commentText.setText(person.getComment());
 
         saveButton.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
+            public void onClick(View v) {   //saves values into person object
                 try {
                     person.setName(editNameText.getText().toString());
                 } catch (NameTooLongException e) {
                     e.printStackTrace();
                 }
-                person.setDate(new Date());//TODO string impelementation
-                person.setNeck(Integer.parseInt(neckText.getText().toString()));
-                person.setBust(Integer.parseInt(bustText.getText().toString()));
-                person.setChest(Integer.parseInt(chestText.getText().toString()));
-                person.setWaist(Integer.parseInt(waistText.getText().toString()));
-                person.setHip(Integer.parseInt(hipText.getText().toString()));
-                person.setInseam(Integer.parseInt(inseamText.getText().toString()));
+                person.setDate(dateText.getText().toString());
+                person.setNeck(Float.parseFloat(neckText.getText().toString()));
+                person.setBust(Float.parseFloat(bustText.getText().toString()));
+                person.setChest(Float.parseFloat(chestText.getText().toString()));
+                person.setWaist(Float.parseFloat(waistText.getText().toString()));
+                person.setHip(Float.parseFloat(hipText.getText().toString()));
+                person.setInseam(Float.parseFloat(inseamText.getText().toString()));
                 person.setComment(commentText.getText().toString());
 
                 Intent intent = new Intent(EditRecordsActivity.this, SizeBook.class);
                 intent.putExtra("person", person);
 
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("person", person);    //returns data
+                returnIntent.putExtra("position", position);
+                setResult(RESULT_OK, returnIntent);
                 finish();
+
             }
         });
 
         backButton.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
+            public void onClick(View v) {   //cancels edit
 
                 finish();
             }

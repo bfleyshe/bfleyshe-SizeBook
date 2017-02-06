@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 
 /**
  * The primary class that runs this application. In this class, user interaction and
- * data manipulation are performed.
+ * control flow are maintained.
  *
  * @author bfleyshe
  * @version 1.0
@@ -39,7 +40,7 @@ import java.util.ArrayList;
 public class SizeBook extends AppCompatActivity {
 
     private static final String FILENAME = "file.sav";
-    private EditText bodyText;
+    private static final Integer SelectPerson = 1;
     private ListView RecordsList;
     private Integer recordCount;
 
@@ -54,12 +55,11 @@ public class SizeBook extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_size_book);
 
-        //bodyText = (EditText) findViewById(R.id.body);
         RecordsList = (ListView) findViewById(R.id.personList);
         Button addButton = (Button) findViewById(R.id.add);
         final Button editButton = (Button) findViewById(R.id.edit);
         final Button deleteButton = (Button) findViewById(R.id.delete);
-        final TextView recordText = (TextView) findViewById(R.id.recordsView);
+        final TextView recordText = (TextView) findViewById(R.id.recordsView);  //records:num of records text at top
 
         RecordsList.setAdapter(adapter);
 
@@ -69,29 +69,22 @@ public class SizeBook extends AppCompatActivity {
            @Override
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-               if(interactMode == 1){
+               if(interactMode == 1){   //interactMode = edit
                    editButton.setBackgroundResource(android.R.drawable.btn_default);
                    Intent intent = new Intent(SizeBook.this, EditRecordsActivity.class);
                    intent.putExtra("person", personList.get(position));
+                   intent.putExtra("position", position);
                    interactMode = 0;
-                   startActivity(intent);
-
-/*
-                   Intent i = getIntent();
-                   final Person person = i.getParcelableExtra("person");
-
-                   personList.remove(position);
-                   personList.add(position, person);
-*/
+                   startActivityForResult(intent, SelectPerson);
                }
-               else if(interactMode == 2){
+               else if(interactMode == 2){  //interactMode = delete
                    personList.remove(position);
                    recordCount--;
                    recordText.setText("Records:" + recordCount, TextView.BufferType.EDITABLE);
                    saveInFile();
                }
 
-               else if(interactMode == 0){
+               else if(interactMode == 0){ //interactMode = view
                    Intent intent = new Intent(SizeBook.this, ViewRecordsActivity.class);
                    intent.putExtra("person", personList.get(position));
                    startActivity(intent);
@@ -105,8 +98,8 @@ public class SizeBook extends AppCompatActivity {
 
             public void onClick(View v) {
                 setResult(RESULT_OK);
-                interactMode = 0;   // returns to view mode
-                String name = "Name";//bodyText.getText().toString();    // to change later
+
+                String name = "Name"; //creates record with the name "Name"
 
                 try {
                     Person person = new Person(name);
@@ -115,13 +108,14 @@ public class SizeBook extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                adapter.notifyDataSetChanged();
-
                 recordCount++;
-                recordText.setText("Records:" + recordCount, TextView.BufferType.EDITABLE);
+                recordText.setText("Records:" + recordCount, TextView.BufferType.EDITABLE); //updates recordCount
 
-                editButton.setBackgroundResource(android.R.drawable.btn_default);
+                interactMode = 0;   // returns to view mode
+                editButton.setBackgroundResource(android.R.drawable.btn_default);   //resets interactMode and updates view
                 deleteButton.setBackgroundResource(android.R.drawable.btn_default);
+
+                adapter.notifyDataSetChanged();
 
                 saveInFile();
             }
@@ -129,7 +123,7 @@ public class SizeBook extends AppCompatActivity {
 
         editButton.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
+            public void onClick(View v) {   //activates or deactivates edit mode
                 setResult(RESULT_OK);
                 if(interactMode == 1){
                     interactMode = 0;
@@ -147,7 +141,7 @@ public class SizeBook extends AppCompatActivity {
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
+            public void onClick(View v) {   //activates or deactivates delete mode
 
                 setResult(RESULT_OK);
                 if(interactMode == 2){
@@ -159,23 +153,50 @@ public class SizeBook extends AppCompatActivity {
                     editButton.setBackgroundResource(android.R.drawable.btn_default);
                     deleteButton.setBackgroundColor(Color.DKGRAY);
                 }
-
             }
         });
-
     }
 
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
         super.onStart();
         loadFromFile();
-        adapter = new ArrayAdapter<Person>(this,
+        adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, personList);
         RecordsList.setAdapter(adapter);
-        recordCount = personList.size();
+
+        recordCount = personList.size();    //gets record count and updates it
+        final TextView recordText = (TextView) findViewById(R.id.recordsView);
+        recordText.setText("Records:" + recordCount, TextView.BufferType.EDITABLE);
+        adapter.notifyDataSetChanged();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == SelectPerson) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+
+                //Intent returnedIntent = getIntent();
+
+                setResult(RESULT_OK);
+                interactMode = 0;   // returns to view mode
+                Person person = data.getParcelableExtra("person");  //retrieves person from EditActivity
+                int position = data.getIntExtra("position", 0);
+
+                personList.remove(position);
+                personList.add(position, person);
+                recordCount++;
+
+                adapter.notifyDataSetChanged();
+                saveInFile();
+                RecordsList.setAdapter(adapter);
+
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
 
     /**
      * Loads records from specified file.
@@ -183,8 +204,6 @@ public class SizeBook extends AppCompatActivity {
      * @exception FileNotFoundException if the file is not created first.
      */
     private void loadFromFile() {
-
-        //personList = new ArrayList<Person>();
 
         try {
             FileInputStream fis = openFileInput(FILENAME);
@@ -206,7 +225,6 @@ public class SizeBook extends AppCompatActivity {
     /**
      * Saves records into specified file.
      *
-     * @throws FileNotFoundException if there is no file folder to be found
      */
 
     private void saveInFile() {
