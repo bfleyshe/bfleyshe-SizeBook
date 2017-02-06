@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.Date;
-
+/**
+ * The type Edit records activity. This activity allows the user to edit data about the person and it is then returned to the
+ * main activity upon pressing save. Otherwise changes are not passed back and are "discarded"
+ */
 public class EditRecordsActivity extends AppCompatActivity {
 
     //edit fields

@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * The type View records activity. Simply displays information about the person object that is passed
+ * in. Back button ends the activity and returns to the main SizeBook activity.
+ */
 public class ViewRecordsActivity extends AppCompatActivity {
 
     @Override
@@ -14,7 +18,7 @@ public class ViewRecordsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_records);
 
-        //viewAble text
+        //viewable text variables assigned
         TextView editNameText = (TextView) findViewById(R.id.nameView);
         TextView dateText = (TextView) findViewById(R.id.dateView);
         TextView neckText = (TextView) findViewById(R.id.neckView);
@@ -30,7 +34,7 @@ public class ViewRecordsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final Person person = intent.getParcelableExtra("person");
 
-        //loads data
+        //loads data to view
         editNameText.setText("Name:" + person.getName(), TextView.BufferType.EDITABLE);
         dateText.setText("Date:" + person.getDate(), TextView.BufferType.EDITABLE);
         neckText.setText("Neck:" + person.getNeck(), TextView.BufferType.EDITABLE);

@@ -9,10 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -144,12 +142,12 @@ public class SizeBook extends AppCompatActivity {
             public void onClick(View v) {   //activates or deactivates delete mode
 
                 setResult(RESULT_OK);
-                if(interactMode == 2){
+                if(interactMode == 2){  //sets to view mode
                     interactMode = 0;
                     deleteButton.setBackgroundResource(android.R.drawable.btn_default);
                 }
                 else {
-                    interactMode = 2;
+                    interactMode = 2;   //set to delete mode
                     editButton.setBackgroundResource(android.R.drawable.btn_default);
                     deleteButton.setBackgroundColor(Color.DKGRAY);
                 }
@@ -185,7 +183,7 @@ public class SizeBook extends AppCompatActivity {
                 Person person = data.getParcelableExtra("person");  //retrieves person from EditActivity
                 int position = data.getIntExtra("position", 0);
 
-                personList.remove(position);
+                personList.remove(position);    //removes the person at the index, then adds the new updated person
                 personList.add(position, person);
                 recordCount++;
 

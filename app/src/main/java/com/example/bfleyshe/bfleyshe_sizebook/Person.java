@@ -10,7 +10,9 @@ import android.os.Parcelable;
 import java.util.Date;
 
 /**
- * Created by bfleyshe on 2/1/17.
+ * Created by bfleyshe on 2/1/17. This class extends the Parcelable class to allow information to be
+ * easily passed between activities to easily update information. The class primarily keeps track of
+ * person characteristics like name, the date the record was edited and dimensions.
  */
 public class Person implements Parcelable{
 
@@ -28,10 +30,11 @@ public class Person implements Parcelable{
      * Instantiates a new Person with a Name.
      *
      * @param Name the name of the person
+     * @throws NameTooLongException the name too long exception
      */
     public Person(String Name) throws NameTooLongException{
         this.name = Name;
-        setDate(new Date().toString());
+        setDate(new Date().toString()); //using the current date as the default
     }
 
     /**
@@ -47,6 +50,7 @@ public class Person implements Parcelable{
      * Sets the name of the person.
      *
      * @param name the name of the person
+     * @throws NameTooLongException the name too long exception
      */
     public void setName(String name) throws NameTooLongException{
         if (name.length() > 30)  {
@@ -97,7 +101,7 @@ public class Person implements Parcelable{
      */
     public void setNeck(Float neck) {
         this.neck = (float)Math.round(neck * 10) / 10;
-    }
+    }   //rounding to 1 decimal point
 
     /**
      * Gets bust circumference in inches.
@@ -235,7 +239,10 @@ public class Person implements Parcelable{
         out.writeString(getComment());
     }
 
-    // this is used to regenerate the object. All Parcelables must have a CREATOR that implements these two methods
+    /**
+     * The constant CREATOR.
+     */
+// this is used to regenerate the object. All Parcelables must have a CREATOR that implements these two methods
     public static final Parcelable.Creator<Person> CREATOR = new Parcelable.Creator<Person>() {
         public Person createFromParcel(Parcel in) {
             return new Person(in);
