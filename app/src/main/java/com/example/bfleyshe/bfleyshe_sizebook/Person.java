@@ -15,14 +15,14 @@ import java.util.Date;
 public class Person implements Parcelable{
 
     private String name;
-    private Date date;
-    private Integer neck = 0;
-    private Integer bust = 0;
-    private Integer chest = 0;
-    private Integer waist = 0;
-    private Integer hip = 0;
-    private Integer inseam = 0;
-    private String comment = "None";
+    private String date;
+    private Float neck = 0f;
+    private Float bust = 0f;
+    private Float chest = 0f;
+    private Float waist = 0f;
+    private Float hip = 0f;
+    private Float inseam = 0f;
+    private String comment;
 
     /**
      * Instantiates a new Person with a Name.
@@ -31,7 +31,7 @@ public class Person implements Parcelable{
      */
     public Person(String Name) throws NameTooLongException{
         this.name = Name;
-        setDate(new Date());
+        setDate(new Date().toString());
     }
 
     /**
@@ -49,8 +49,11 @@ public class Person implements Parcelable{
      * @param name the name of the person
      */
     public void setName(String name) throws NameTooLongException{
-        if (name.length() > 30) {
+        if (name.length() > 30)  {
             throw new NameTooLongException();
+        }
+        if (name.length() < 1)  {
+            throw new NameTooLongException();   // doesn't allow the user to enter an empty string, instead keeping whatever value is already there
         }
         this.name = name;
     }
@@ -60,7 +63,7 @@ public class Person implements Parcelable{
      *
      * @return the date
      */
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -69,8 +72,13 @@ public class Person implements Parcelable{
      *
      * @param date the date
      */
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(String date) {
+        if(date != null) {
+            this.date = date;
+        }
+        else{
+            this.date = "1/01/2017";
+        }
     }
 
     /**
@@ -78,7 +86,7 @@ public class Person implements Parcelable{
      *
      * @return the neck circumference in inches
      */
-    public Integer getNeck() {
+    public Float getNeck() {
         return neck;
     }
 
@@ -87,8 +95,8 @@ public class Person implements Parcelable{
      *
      * @param neck measurement of circumference in inches
      */
-    public void setNeck(Integer neck) {
-        this.neck = neck;
+    public void setNeck(Float neck) {
+        this.neck = (float)Math.round(neck * 10) / 10;
     }
 
     /**
@@ -96,7 +104,7 @@ public class Person implements Parcelable{
      *
      * @return the bust circumference in inches
      */
-    public Integer getBust() {
+    public Float getBust() {
         return bust;
     }
 
@@ -105,8 +113,8 @@ public class Person implements Parcelable{
      *
      * @param bust measurement of circumference in inches
      */
-    public void setBust(Integer bust) {
-        this.bust = bust;
+    public void setBust(Float bust) {
+        this.bust =(float)Math.round(bust * 10) / 10;
     }
 
     /**
@@ -114,7 +122,7 @@ public class Person implements Parcelable{
      *
      * @return the chest circumference in inches
      */
-    public Integer getChest() {
+    public Float getChest() {
         return chest;
     }
 
@@ -123,8 +131,8 @@ public class Person implements Parcelable{
      *
      * @param chest measurement of circumference in inches
      */
-    public void setChest(Integer chest) {
-        this.chest = chest;
+    public void setChest(Float chest) {
+        this.chest = (float)Math.round(chest * 10) / 10;
     }
 
     /**
@@ -132,7 +140,7 @@ public class Person implements Parcelable{
      *
      * @return the waist circumference in inches
      */
-    public Integer getWaist() {
+    public Float getWaist() {
         return waist;
     }
 
@@ -141,8 +149,8 @@ public class Person implements Parcelable{
      *
      * @param waist measurement of circumference in inches
      */
-    public void setWaist(Integer waist) {
-        this.waist = waist;
+    public void setWaist(Float waist) {
+        this.waist = (float)Math.round(waist * 10) / 10;;
     }
 
     /**
@@ -150,7 +158,7 @@ public class Person implements Parcelable{
      *
      * @return the hip circumference in inches
      */
-    public Integer getHip() {
+    public Float getHip() {
         return hip;
     }
 
@@ -159,8 +167,8 @@ public class Person implements Parcelable{
      *
      * @param hip measurement of circumference in inches
      */
-    public void setHip(Integer hip) {
-        this.hip = hip;
+    public void setHip(Float hip) {
+        this.hip = (float)Math.round(hip * 10) / 10;;
     }
 
     /**
@@ -168,7 +176,7 @@ public class Person implements Parcelable{
      *
      * @return the inseam length in inches
      */
-    public Integer getInseam() {
+    public Float getInseam() {
         return inseam;
     }
 
@@ -177,8 +185,8 @@ public class Person implements Parcelable{
      *
      * @param inseam measurement of length in inches
      */
-    public void setInseam(Integer inseam) {
-        this.inseam = inseam;
+    public void setInseam(Float inseam) {
+        this.inseam = (float)Math.round(inseam * 10) / 10;;
     }
 
     /**
@@ -213,22 +221,21 @@ public class Person implements Parcelable{
         return 0;
     }
 
-    // write my object's data to the passed-in Parcel
+    // write the object's data to the passed-in Parcel
     @Override
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(getName());
-        //out.writeString(date.toString());
-
-        out.writeInt(getNeck());
-        out.writeInt(getBust());
-        out.writeInt(getChest());
-        out.writeInt(getWaist());
-        out.writeInt(getHip());
-        out.writeInt(getInseam());
+        out.writeString(getDate());
+        out.writeFloat(getNeck());
+        out.writeFloat(getBust());
+        out.writeFloat(getChest());
+        out.writeFloat(getWaist());
+        out.writeFloat(getHip());
+        out.writeFloat(getInseam());
         out.writeString(getComment());
     }
 
-    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    // this is used to regenerate the object. All Parcelables must have a CREATOR that implements these two methods
     public static final Parcelable.Creator<Person> CREATOR = new Parcelable.Creator<Person>() {
         public Person createFromParcel(Parcel in) {
             return new Person(in);
@@ -239,22 +246,16 @@ public class Person implements Parcelable{
         }
     };
 
-    // example constructor that takes a Parcel and gives you an object populated with it's values
+    //  constructor that takes a Parcel and gives an object populated with it's values
     private Person(Parcel in) {
-        name = in.readString();/*
-        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        try {
-            date = (Date)formatter.parse(in.readString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
-        neck = in.readInt();
-        bust = in.readInt();
-        chest = in.readInt();
-        waist = in.readInt();
-        hip = in.readInt();
-        inseam = in.readInt();
+        name = in.readString();
+        date = in.readString();
+        neck = in.readFloat();
+        bust = in.readFloat();
+        chest = in.readFloat();
+        waist = in.readFloat();
+        hip = in.readFloat();
+        inseam = in.readFloat();
         comment = in.readString();
-
     }
 }

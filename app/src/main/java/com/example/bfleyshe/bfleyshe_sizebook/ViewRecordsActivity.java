@@ -14,6 +14,7 @@ public class ViewRecordsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_records);
 
+        //viewAble text
         TextView editNameText = (TextView) findViewById(R.id.nameView);
         TextView dateText = (TextView) findViewById(R.id.dateView);
         TextView neckText = (TextView) findViewById(R.id.neckView);
@@ -29,6 +30,7 @@ public class ViewRecordsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final Person person = intent.getParcelableExtra("person");
 
+        //loads data
         editNameText.setText("Name:" + person.getName(), TextView.BufferType.EDITABLE);
         dateText.setText("Date:" + person.getDate(), TextView.BufferType.EDITABLE);
         neckText.setText("Neck:" + person.getNeck(), TextView.BufferType.EDITABLE);
@@ -39,6 +41,8 @@ public class ViewRecordsActivity extends AppCompatActivity {
         inseamText.setText("Inseam:" + person.getInseam(), TextView.BufferType.EDITABLE);
         commentText.setText("Comment:" + person.getComment(), TextView.BufferType.EDITABLE);
 
+
+        //returns back to SizeBook
         backButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
